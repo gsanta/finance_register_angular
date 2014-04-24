@@ -1,6 +1,6 @@
-<form ng-submit="addProduct()">
-	<input type="text" ng-model="product.name"><br>
-	<input type="text" ng-model="product.price"><br>
-	<input type="text" ng-model="product.amount"><br>
+<form name="createForm" ng-submit="addProduct(createForm.$valid)" novalidate>
+	<input type="text" ng-model="product.name" required><br>
+	<input type="text" ng-model="product.price" required><br>
+	<input type="text" ng-model="product.amount" required><br>
 	<input type="submit" value="add">
 </form>

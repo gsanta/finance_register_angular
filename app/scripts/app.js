@@ -22,6 +22,10 @@ angular
         templateUrl: 'views/products/create.html',
         controller: 'ProductsCreateCtrl'
       })
+      .when('/product/:productId/edit', {
+        templateUrl: 'views/product/edit.html',
+        controller: 'ProductEditCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

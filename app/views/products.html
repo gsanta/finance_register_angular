@@ -1,1 +1,7 @@
 Products
+
+<ul>
+	<li ng-repeat="product in getProducts()">
+		{{product.name}} | <a href="#/product/{{product.id}}/edit">Edit</a>
+	</li>
+</ul>
