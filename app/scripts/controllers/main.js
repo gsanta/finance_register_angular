@@ -7,8 +7,9 @@ angular.module('financeRegisterApp')
 
 angular.module('financeRegisterApp')
 .controller('ProductsCtrl', function ($scope, localStorageService) {
-
-	$scope.getProducts = function() {
+	$scope.productsArray = [];
+	
+	(function fetchProducts() {
 		var keyArray = localStorageService.keys();
 		var resultArray = [];
 		for(var i = 0; i < keyArray.length; i++) {
@@ -16,7 +17,11 @@ angular.module('financeRegisterApp')
 			resultArray[i].id = keyArray[i];
 		}
 
-		return resultArray;
+		$scope.productsArray = resultArray;
+	})()
+
+	$scope.getProducts = function() {
+		return $scope.productsArray;//fetchProducts();
 		//return localStorageService.get('localStorageKey');
 	}
 });

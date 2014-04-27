@@ -1,7 +1,11 @@
-Products
-
-<ul>
-	<li ng-repeat="product in getProducts()">
-		{{product.name}} | <a href="#/product/{{product.id}}/edit">Edit</a>
-	</li>
-</ul>
+<div data-role="listview" data-inset="true">
+	<div ng-repeat="product in getProducts()" class="panel panel-default">
+		<div class="panel-body">
+			<span class="date">{{product.createdAt}}</span> |
+			<span class="name">{{product.name}}</span> |
+			<span class="price">{{product.price}}</span> |
+			<span class="price">{{product.amount}}</span> |
+			<a class="btn btn-default product-link" href="#/product/{{product.id}}/edit">Details</a>
+		</div>
+	</div>
+</div>
