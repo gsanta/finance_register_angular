@@ -30,12 +30,13 @@ angular.module('financeRegisterApp')
 .controller('ProductsCreateCtrl', function ($scope, localStorageService, $location) {
 	$scope.product = {}
 	$scope.addProduct = function(isValid) {
-		$scope.product.createdAt = new Date();
-		localStorageService.add( new Date().getTime() ,$scope.product);
-
+		
 		if (!isValid) {
 				alert('our form is buggy');
 		} else {
+			$scope.product.createdAt = new Date();
+			localStorageService.add( new Date().getTime() ,$scope.product);
+
 			$location.path('/products');
 		}
 	}
