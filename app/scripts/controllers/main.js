@@ -31,14 +31,17 @@ angular.module('financeRegisterApp')
 	$scope.product = {}
 	$scope.addProduct = function(isValid) {
 		
-		if (!isValid) {
-				alert('our form is buggy');
-		} else {
+		if (isValid) {
 			$scope.product.createdAt = new Date();
 			localStorageService.add( new Date().getTime() ,$scope.product);
 
 			$location.path('/products');
 		}
+	}
+
+	$scope.cancel = function() {
+
+		$location.path('/products');
 	}
 });
 
@@ -48,7 +51,11 @@ angular.module('financeRegisterApp')
 		$scope.product = localStorageService.get( $routeParams.productId );
 	})()
 
-	$scope.saveProduct = function() {
-		localStorageService.set( $routeParams.productId , $scope.product );
+	$scope.saveProduct = function( isValid ) {
+
+		if (isValid) {
+			localStorageService.set( $routeParams.productId , $scope.product );
+			$location.path('/products');
+		}
 	}
 });

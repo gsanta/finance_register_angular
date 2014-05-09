@@ -3,28 +3,34 @@
 
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<div class="input-wrapper">
-				<input type="text" name="name" class="form-control product-name input-item" ng-model="product.name" required/>
+			<div class="input-wrapper" ng-class="{ 'has-error' : createForm.name.$invalid && !createForm.name.$pristine }">
+				<input type="text" name="name" class="form-control product-name input-item" ng-model="product.name"  required/>
 			</div>
 
-			<div class="input-wrapper">
-			<input type="text" name="price" class="form-control product-name input-item" ng-model="product.price" required/>
+			<div class="input-wrapper" ng-class="{ 'has-error' : createForm.price.$invalid && !createForm.price.$pristine }">
+				<input type="text" ng-pattern="/^[+]?([.]\d+|\d+([.]\d+)?)$/" name="price" class="form-control product-name input-item" ng-model="product.price" required/>
 			</div>
 
-			<div class="input-wrapper" >
-			<input type="text" name="amount" class="form-control product-name input-item" ng-model="product.amount" required/>
+			<div class="input-wrapper" ng-class="{ 'has-error' : createForm.amount.$invalid && !createForm.amount.$pristine }">
+				<input type="text" ng-pattern="/^[+]?([.]\d+|\d+([.]\d+)?)$/" name="amount" class="form-control product-name input-item" ng-model="product.amount" required/>
 			</div>
 		</div>
 	</div> 
-	
-	<ul>
-		<li ng-show="createForm.name.$invalid && !createForm.name.$pristine">Kötelező</li>
-	</ul>
 
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<input type="submit" class="btn btn-default btn-block save input-item" value="Save" ng-disabled="createForm.$invalid">
-			<button  class="btn btn-default btn-block input-item">Cancel</button>
+			<button  class="btn btn-default btn-block input-item" ng-click="cancel()">Cancel</button>
 		</div>
 	</div>  
 </form>
+
+<ul>
+		<li ng-show="createForm.name.$invalid && !createForm.name.$pristine">{{createForm.name.$error}}</li>
+		<li ng-show="( createForm.price.$error.pattern || createForm.price.$error.required ) && !createForm.price.$pristine">
+			Price must be a positive number			
+		</li>
+		<li ng-show="( createForm.amount.$error.pattern || createForm.amount.$error.required ) && !createForm.amount.$pristine">
+			Amount must be a positive number
+		</li>
+	</ul>
