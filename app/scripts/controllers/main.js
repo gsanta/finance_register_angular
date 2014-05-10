@@ -70,3 +70,32 @@ angular.module('financeRegisterApp')
 		$location.path('/products');
 	}
 });
+
+angular.module('financeRegisterApp')
+.controller('StatisticsCtrl', function ($scope, localStorageService ) {	
+	$scope.productsArray = [];
+	$scope.fullExpense = 0;
+	
+	(function fetchProducts() {
+		var keyArray = localStorageService.keys();
+		var resultArray = [];
+		var fullExpense = 0;
+
+		for(var i = 0; i < keyArray.length; i++) {
+			resultArray.unshift( localStorageService.get( keyArray[i] ) );
+			resultArray[0].id = keyArray[i];
+			fullExpense += resultArray[0].price * resultArray[0].amount;
+		}
+
+		$scope.productsArray = resultArray;
+		$scope.fullExpense = fullExpense;
+	})()
+
+	$scope.getFullExpense = function() {
+		return $scope.fullExpense;
+	}
+
+	$scope.getMonthlyExpense = function() {
+		
+	}
+});
