@@ -1,4 +1,4 @@
-<form name="editForm" ng-submit="saveProduct(editForm.$valid)" novalidate>
+<form name="editForm" novalidate>
 
 	<div class="panel panel-default">
 		<div class="panel-body">
@@ -36,9 +36,9 @@
 
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<input type="submit" class="btn btn-default btn-block save input-item" value="Save" ng-disabled="editForm.$invalid">
-			<button  class="btn btn-danger btn-block">Delete</button>
-			<button  class="btn btn-block">New product from this item</button>
+			<input type="submit" class="btn btn-default btn-block save input-item" value="Save" ng-disabled="editForm.$invalid" ng-click="saveProduct(editForm.$valid)">
+			<button  class="btn btn-danger btn-block" ng-click="deleteProduct()">Delete</button>
+			<button  class="btn btn-block" ng-click="newProductFromThisItem()">New product from this item</button>
 		</div>
 	</div>  
 </form>

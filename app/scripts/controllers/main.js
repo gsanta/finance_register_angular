@@ -13,8 +13,8 @@ angular.module('financeRegisterApp')
 		var keyArray = localStorageService.keys();
 		var resultArray = [];
 		for(var i = 0; i < keyArray.length; i++) {
-			resultArray[i] = localStorageService.get( keyArray[i] );
-			resultArray[i].id = keyArray[i];
+			resultArray.unshift( localStorageService.get( keyArray[i] ) );
+			resultArray[0].id = keyArray[i];
 		}
 
 		$scope.productsArray = resultArray;
@@ -57,5 +57,16 @@ angular.module('financeRegisterApp')
 			localStorageService.set( $routeParams.productId , $scope.product );
 			$location.path('/products');
 		}
+	}
+
+	$scope.deleteProduct = function() {
+		localStorageService.remove( $routeParams.productId );
+		$location.path('/products');
+	}
+
+	$scope.newProductFromThisItem = function() {
+		$scope.product.createdAt = new Date();
+		localStorageService.add( new Date().getTime() ,$scope.product);
+		$location.path('/products');
 	}
 });
